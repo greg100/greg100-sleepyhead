@@ -115,7 +115,9 @@ SOURCES += main.cpp\
     reports.cpp \
     summary.cpp \
     sessionbar.cpp \
-    Graphs/gspacer.cpp
+    Graphs/gspacer.cpp \
+    nonin9560_Oximetry.cpp
+    
 
 HEADERS  += \
     SleepLib/machine.h \
@@ -162,7 +164,8 @@ HEADERS  += \
     reports.h \
     summary.h \
     sessionbar.h \
-    Graphs/gspacer.h
+    Graphs/gspacer.h \
+    nonin9560_Oximetry.h
 
 
 FORMS    += \
@@ -224,20 +227,22 @@ mac {
     QMAKE_BUNDLE_DATA += TransFiles
 }
 
-win32|mac {
+win32|mac|unix {
     include(../3rdparty/quazip/quazip/quazip.pri)
     INCLUDEPATH += $$PWD/../3rdparty/quazip
     DEPENDPATH += $$PWD/../3rdparty/quazip
-} else:unix {
-    QMAKE_LFLAGS += -L/usr/lib -L/usr/local/lib
-    INCLUDEPATH += /usr/local/include
-    INCLUDEPATH += /usr/include
-    DEPENDPATH += /usr/local/include/quazip
-    DEPENDPATH += /usr/include/quazip
-    LIBS += -lquazip
 }
+# else:unix {
+#    QMAKE_LFLAGS += -L/usr/lib -L/usr/local/lib
+#    INCLUDEPATH += /usr/local/include
+#    INCLUDEPATH += /usr/include
+#    DEPENDPATH += /usr/local/include/quazip
+#    DEPENDPATH += /usr/include/quazip
+#    LIBS += -lquazip
+#}
 
-win32|mac{
+
+win32|mac|unix{
     include(../3rdparty/qextserialport/src/qextserialport.pri)
 } else {
     CONFIG += extserialport
